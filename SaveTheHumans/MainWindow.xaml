@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SaveTheHumans"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="Save The Humans" Height="350" Width="525">
+    <Window.Resources>
+        <ControlTemplate x:Key="EnemyTemplate" TargetType="{x:Type ContentControl}">
+            <Grid>
+                <Ellipse Fill="Red" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Center" Width="100"/>
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140"/>
             <ColumnDefinition />
@@ -17,11 +24,26 @@
             <RowDefinition />
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
-        
+
         <Button x:Name="startButton" Content="Start!" HorizontalAlignment="Center" Margin="0" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="62,73,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <ProgressBar Grid.Column="1" HorizontalAlignment="Left" Height="10" Margin="60,73,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"/>
-        <Canvas Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="60,30,0,0" VerticalAlignment="Top" Width="100" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}"/>
-    
+        <StackPanel Grid.Column="2" Margin="0" Orientation="Vertical" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center" Margin="0,0,1,0" TextWrapping="Wrap" Text="Avoid These" VerticalAlignment="Center" FontSize="18" Width="105" Foreground="White" TextAlignment="Center"/>
+            <ContentControl Content="ContentControl" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Template="{DynamicResource EnemyTemplate}"/>
+
+        </StackPanel>
+        <ProgressBar Grid.Column="1" Grid.Row="1" Height="20"/>
+        <Canvas x:Name="playArea" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Grid.ColumnSpan="3">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="#FFB22D2D" Offset="1"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+            <StackPanel x:Name="human" Orientation="Vertical">
+                <Ellipse Fill="White" Height="10" Stroke="Black" Width="10"/>
+                <Rectangle Fill="White" Height="25" Stroke="Black" Width="10"/>
+            </StackPanel>
+        </Canvas>
+
     </Grid>
 </Window>
